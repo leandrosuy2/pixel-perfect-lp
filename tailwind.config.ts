@@ -12,8 +12,16 @@ export default {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      sans: ['Outfit', 'sans-serif'],
+    },
     extend: {
       colors: {
+        magenta: {
+          DEFAULT: "hsl(var(--magenta))",
+          foreground: "hsl(var(--magenta-foreground))",
+        },
+        "purple-glow": "hsl(var(--purple-glow))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
