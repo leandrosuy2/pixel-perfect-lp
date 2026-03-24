@@ -5,14 +5,7 @@ import heroBg from "@/assets/hero-bg.jpg";
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-start overflow-hidden pt-20">
-      <img
-        src={heroBg}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover"
-        width={1920}
-        height={1080}
-      />
-      <div className="absolute inset-0 bg-background/60" />
+      <div className="absolute inset-0 bg-background" />
       <div className="relative z-10 container mx-auto px-6 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

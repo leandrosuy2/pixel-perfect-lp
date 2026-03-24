@@ -8,7 +8,8 @@ import FunctionsSection from "@/components/FunctionsSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <ParticlesBackground />
       <Navbar />
       <HeroSection />
       <FeaturesSection />
