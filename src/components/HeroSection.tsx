@@ -1,11 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-start overflow-hidden pt-20">
-      <div className="absolute inset-0 bg-background" />
       <div className="relative z-10 container mx-auto px-6 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
