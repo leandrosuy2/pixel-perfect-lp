@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { MessageCircle, Share2, Bell } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { glassCard } from "@/lib/glass";
 
 const features = [
   {
@@ -31,9 +33,12 @@ const FeaturesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.15, duration: 0.5 }}
-              className="flex flex-col items-center text-center p-8 rounded-xl bg-card border border-border hover:border-primary/40 transition-colors"
+              className={cn(
+                glassCard,
+                "flex flex-col items-center p-8 text-center",
+              )}
             >
-              <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center mb-5">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-primary/25 ring-1 ring-primary/20 backdrop-blur-sm">
                 <feature.icon className="w-7 h-7 text-primary" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-3">{feature.title}</h3>

@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { usePageSeo } from "@/hooks/usePageSeo";
+import { SEO } from "@/lib/seo";
 
 const PrivacyPolicy = () => {
+  usePageSeo({
+    title: SEO.privacyTitle,
+    description: SEO.privacyDescription,
+    path: "/politica-de-privacidade",
+    imagePath: SEO.defaultOgImage,
+  });
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border px-6 py-4">

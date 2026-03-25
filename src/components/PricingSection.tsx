@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { glassCard, glassPricingPopular } from "@/lib/glass";
 
 const plans = [
   {
     name: "MENSAL",
     price: "200",
     period: "mês",
-    billing: "CobrançaMensal",
+    billing: "Cobrança mensal",
     description: "Ideal para quem quer testar a ferramenta no seu dia a dia",
     highlight: "SEM FIDELIDADE. CANCELE QUANDO QUISER",
     popular: false,
@@ -15,7 +17,7 @@ const plans = [
     name: "TRIMESTRAL",
     price: "180",
     period: "mês",
-    billing: "CobrançaMensal",
+    billing: "Cobrança mensal",
     description: "Ideal para quem já entendeu que o AZ CHAT é indispensável",
     highlight: "ECONOMIZE 10% COMPARADO AO PLANO MENSAL",
     popular: false,
@@ -24,8 +26,8 @@ const plans = [
     name: "ANUAL",
     price: "150",
     period: "mês",
-    billing: "CobrançaMensal",
-    description: "Melhor custo benefício MAIS POPULAR",
+    billing: "Cobrança mensal",
+    description: "Melhor custo-benefício para escalar com o time",
     highlight: "2 meses grátis + atendimento prioritário",
     popular: true,
   },
@@ -44,7 +46,7 @@ const PricingSection = () => {
           Escolha O Plano Ideal Para Sua Equipe
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-14">
+        <div className="mt-14 grid grid-cols-1 gap-8 pt-6 md:grid-cols-3 md:gap-8">
           {plans.map((plan, index) => (
             <motion.div
               key={plan.name}
@@ -52,14 +54,13 @@ const PricingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.15, duration: 0.5 }}
-              className={`relative flex flex-col items-center p-8 rounded-2xl border transition-all ${
-                plan.popular
-                  ? "border-primary bg-primary/5 shadow-[0_0_40px_-10px_hsl(var(--primary)/0.3)]"
-                  : "border-border bg-card hover:border-primary/30"
-              }`}
+              className={cn(
+                "relative flex flex-col items-center p-8",
+                plan.popular ? glassPricingPopular() : glassCard,
+              )}
             >
               {plan.popular && (
-                <span className="absolute -top-3 bg-primary text-primary-foreground text-xs font-bold px-4 py-1 rounded-full">
+                <span className="absolute -top-3 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-4 py-1.5 text-xs font-bold text-primary-foreground shadow-md ring-2 ring-background">
                   MAIS POPULAR
                 </span>
               )}

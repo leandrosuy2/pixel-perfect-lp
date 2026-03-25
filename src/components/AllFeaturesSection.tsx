@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Check, Star } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { glassHighlight, glassPanel } from "@/lib/glass";
 
 const leftFeatures = [
   "Centralização total: WhatsApp, Instagram e Facebook em um só lugar.",
@@ -24,7 +26,7 @@ const AllFeaturesSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="rounded-2xl border border-border bg-card p-8 md:p-12"
+          className={glassPanel}
         >
           <h3 className="text-2xl font-bold text-foreground mb-8 text-center">
             Todos os planos incluem:
@@ -45,7 +47,7 @@ const AllFeaturesSection = () => {
                   <span className="text-sm text-muted-foreground">{f}</span>
                 </div>
               ))}
-              <div className="flex items-start gap-3 bg-primary/10 rounded-lg p-3 border border-primary/20">
+              <div className={cn(glassHighlight, "flex items-start gap-3")}>
                 <Star className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                 <span className="text-sm text-foreground font-medium">{highlight}</span>
               </div>

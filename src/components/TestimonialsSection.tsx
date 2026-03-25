@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Quote, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { glassCard } from "@/lib/glass";
 
 const testimonials = [
   {
@@ -49,7 +51,7 @@ const TestimonialsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
-              className="flex h-full flex-col rounded-2xl border border-border/80 bg-card/80 p-6 shadow-sm ring-1 ring-primary/5 backdrop-blur-sm transition-shadow hover:shadow-md hover:ring-primary/15"
+              className={cn(glassCard, "flex h-full flex-col p-6")}
             >
               <Quote className="mb-4 h-8 w-8 shrink-0 text-primary/70" aria-hidden />
 
@@ -63,7 +65,7 @@ const TestimonialsSection = () => {
                 {t.text}
               </p>
 
-              <div className="mt-auto flex items-center gap-3 border-t border-border/60 pt-5">
+              <div className="mt-auto flex items-center gap-3 border-t border-white/10 pt-5">
                 <div
                   className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary/25 to-primary/5 text-sm font-bold text-primary"
                   aria-hidden

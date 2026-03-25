@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { glassFooter, glassSocialBtn } from "@/lib/glass";
 
 /** DDI + DDD + número, só dígitos (ex.: 5511999998888). Troque pelo WhatsApp comercial. */
 const WHATSAPP_SALES_NUMBER = "5511999999999";
@@ -29,7 +31,7 @@ const Footer = () => {
   const href = `https://wa.me/${WHATSAPP_SALES_NUMBER}`;
 
   return (
-    <footer className="border-t border-border bg-card/40">
+    <footer className={glassFooter}>
       <div className="container mx-auto space-y-5 px-6 py-5 md:py-6">
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row md:items-center">
           <div className="flex flex-wrap items-center justify-center gap-2 md:justify-start">
@@ -40,10 +42,13 @@ const Footer = () => {
                 href={socialHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-background/50 text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+                className={cn(
+                  glassSocialBtn,
+                  "flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-primary",
+                )}
                 aria-label={label}
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="h-3.5 w-3.5" />
               </a>
             ))}
           </div>
@@ -56,7 +61,7 @@ const Footer = () => {
           </Link>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-3 border-t border-border/60 pt-5 md:flex-row md:justify-between">
+        <div className="flex flex-col items-center justify-center gap-3 border-t border-white/10 pt-5 md:flex-row md:justify-between">
           <p className="text-center text-sm font-medium text-foreground md:text-left">
             Possui dúvidas? Fale com nossa equipe de vendas
           </p>
@@ -66,7 +71,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#20BD5A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            <WhatsAppIcon className="h-4 w-4 shrink-0" />
+            <WhatsAppIcon className="h-3.5 w-3.5 shrink-0" />
             WhatsApp
           </a>
         </div>
