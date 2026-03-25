@@ -16,6 +16,9 @@ export default defineConfig(({ mode }) => ({
   preview: {
     host: true,
     port: Number(process.env.PORT) || 4173,
+    allowedHosts: [
+      "kl-melhor-chat.r97lfn.easypanel.host",
+    ],
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
