@@ -12,10 +12,10 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  /** Produção: `npm start` — escuta em 0.0.0.0; use PORT do ambiente (ex.: 8080, 4173). */
+  /** Produção: `npm start` — escuta em 0.0.0.0 na porta 8080 (ou `process.env.PORT`). */
   preview: {
     host: true,
-    port: Number(process.env.PORT) || 4173,
+    port: Number(process.env.PORT) || 8080,
     allowedHosts: [
       "kl-melhor-chat.r97lfn.easypanel.host",
     ],
