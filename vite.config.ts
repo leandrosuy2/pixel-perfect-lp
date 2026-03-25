@@ -34,7 +34,8 @@ export default defineConfig(({ mode }) => {
     {
       name: "html-seo-site-url",
       transformIndexHtml(html) {
-        return html.replace(/%SITE_URL%/g, siteUrl);
+        // Não use % no placeholder — o Vite aplica decodeURI e quebra (%XX inválido).
+        return html.replace(/__SITE_URL__/g, siteUrl);
       },
     },
   ].filter(Boolean),
