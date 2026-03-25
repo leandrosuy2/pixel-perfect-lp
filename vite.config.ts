@@ -12,6 +12,11 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
+  /** Produção: `npm start` — escuta em 0.0.0.0; use PORT do ambiente (ex.: 8080, 4173). */
+  preview: {
+    host: true,
+    port: Number(process.env.PORT) || 4173,
+  },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
