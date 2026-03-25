@@ -1,85 +1,89 @@
 import { motion } from "framer-motion";
-import { User, Star } from "lucide-react";
+import { Quote, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const testimonials = [
   {
     name: "Ana",
+    company: "La Vanesa",
     text: "Eu estava em uma situação muito difícil antes de conhecer o AZ Chat. Não apenas a plataforma é incrível, como o AZ Chat me ajudou a encontrar uma solução que funcionasse para mim. Tudão, até minha prima ficou fã da ferramenta!",
-    company: "la vanesa",
+    cta: "Visitar clínica",
   },
   {
-    name: "Ana",
-    text: "Eu estava em uma situação muito difícil antes de conhecer o AZ Chat. Não apenas a plataforma é incrível, como o AZ Chat me ajudou a encontrar uma solução que funcionasse para mim. Tudão, até minha prima ficou fã da ferramenta!",
-    company: "la vanesa",
+    name: "Carlos",
+    company: "Distribuidora Norte",
+    text: "Centralizamos o atendimento em um só lugar e o time parou de perder mensagem. O AZ Chat virou peça-chave na operação do nosso time comercial.",
+    cta: "Ver case",
   },
   {
-    name: "Ana",
-    text: "Eu estava em uma situação muito difícil antes de conhecer o AZ Chat. Não apenas a plataforma é incrível, como o AZ Chat me ajudou a encontrar uma solução que funcionasse para mim. Tudão, até minha prima ficou fã da ferramenta!",
-    company: "la vanesa",
-  },
-  {
-    name: "Ana",
-    text: "Eu estava em uma situação muito difícil antes de conhecer o AZ Chat. Não apenas a plataforma é incrível, como o AZ Chat me ajudou a encontrar uma solução que funcionasse para mim. Tudão, até minha prima ficou fã da ferramenta!",
-    company: "la vanesa",
-  },
-  {
-    name: "Ana",
-    text: "Eu estava em uma situação muito difícil antes de conhecer o AZ Chat. Não apenas a plataforma é incrível, como o AZ Chat me ajudou a encontrar uma solução que funcionasse para mim. Tudão, até minha prima ficou fã da ferramenta!",
-    company: "la vanesa",
+    name: "Marina",
+    company: "Studio Criativo",
+    text: "Interface clara, integrações que funcionam e suporte que responde. Recomendamos o AZ Chat para qualquer empresa que leve comunicação a sério.",
+    cta: "Saiba mais",
   },
 ];
 
 const TestimonialsSection = () => {
   return (
-    <section className="py-20 relative">
+    <section id="sobre" className="relative py-20">
       <div className="container mx-auto px-6 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="mb-12 max-w-3xl"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground italic mb-2">
-            EMPRESAS QUE CONFIAM E
-          </h2>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-12">
-            UTILIZAM NOSSA FERRAMENTA
+          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+            Depoimentos
+          </p>
+          <h2 className="mt-2 text-2xl font-bold leading-tight text-foreground md:text-3xl">
+            Empresas que confiam e utilizam nossa ferramenta
           </h2>
         </motion.div>
 
-        <div className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
           {testimonials.map((t, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
+            <motion.article
+              key={t.name}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="min-w-[260px] max-w-[280px] flex-shrink-0 rounded-xl border border-border bg-card/60 backdrop-blur-sm p-6 flex flex-col"
+              transition={{ delay: index * 0.08 }}
+              className="flex h-full flex-col rounded-2xl border border-border/80 bg-card/80 p-6 shadow-sm ring-1 ring-primary/5 backdrop-blur-sm transition-shadow hover:shadow-md hover:ring-primary/15"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                  <User className="w-5 h-5 text-muted-foreground" />
-                </div>
-                <span className="font-semibold text-foreground">{t.name}</span>
-              </div>
+              <Quote className="mb-4 h-8 w-8 shrink-0 text-primary/70" aria-hidden />
 
-              <div className="flex gap-1 mb-4">
+              <div className="mb-4 flex gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                  <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                 ))}
               </div>
 
-              <p className="text-xs text-muted-foreground leading-relaxed flex-1 mb-6">
+              <p className="mb-6 flex-1 text-sm leading-relaxed text-muted-foreground">
                 {t.text}
               </p>
 
-              <div className="mt-auto space-y-3">
-                <p className="text-xs text-muted-foreground font-medium">{t.company}</p>
-                <button className="w-full text-xs border border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground rounded-full py-2 transition-colors font-medium">
-                  Vísitar Clínica
-                </button>
+              <div className="mt-auto flex items-center gap-3 border-t border-border/60 pt-5">
+                <div
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary/25 to-primary/5 text-sm font-bold text-primary"
+                  aria-hidden
+                >
+                  {t.name.charAt(0)}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate font-semibold text-foreground">{t.name}</p>
+                  <p className="truncate text-xs text-muted-foreground">{t.company}</p>
+                </div>
               </div>
-            </motion.div>
+
+              <Button
+                variant="outline"
+                className="mt-4 w-full rounded-full border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground"
+                type="button"
+              >
+                {t.cta}
+              </Button>
+            </motion.article>
           ))}
         </div>
       </div>

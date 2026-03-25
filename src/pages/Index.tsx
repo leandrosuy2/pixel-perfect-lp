@@ -6,6 +6,7 @@ import ParticlesBackground from "@/components/ParticlesBackground";
 import AllFeaturesSection from "@/components/AllFeaturesSection";
 import FunctionsSection from "@/components/FunctionsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
       <AllFeaturesSection />
       <FunctionsSection />
       <TestimonialsSection />
+      <Footer />
     </div>
   );
 };
