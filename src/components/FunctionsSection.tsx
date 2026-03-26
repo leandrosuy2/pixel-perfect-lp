@@ -1,13 +1,15 @@
 import { useCallback, useState } from "react";
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
+import { ChevronRight, LayoutGrid, MessageCircle, Play, Sparkles } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { glassCard, glassPanel } from "@/lib/glass";
 
 /** IDs públicos com embed habitualmente permitido (varia a cada clique). */
 const YOUTUBE_EMBED_POOL = [
@@ -36,21 +38,27 @@ function pickRandomVideoId(): string {
 const functionItems = [
   {
     label: "FUNÇÃO 01",
+    short: "01",
     title: "Atendimento multicanal",
     description:
       "Centralize WhatsApp, Instagram e Facebook em uma única tela. Atribua conversas, veja histórico e evite mensagens perdidas.",
+    Icon: MessageCircle,
   },
   {
     label: "FUNÇÃO 02",
+    short: "02",
     title: "Kanban e tarefas",
     description:
       "Organize vendas, produção e suporte em colunas visuais, com anexos e responsáveis — no estilo que sua equipe já conhece.",
+    Icon: LayoutGrid,
   },
   {
     label: "FUNÇÃO 03",
+    short: "03",
     title: "Automação e equipe",
     description:
       "Agende envios, use disparos com critérios e controle permissões por função, mantendo métricas em tempo real no painel.",
+    Icon: Sparkles,
   },
 ] as const;
 
@@ -76,73 +84,118 @@ const FunctionsSection = () => {
   const current = functionItems[activeIndex];
 
   return (
-    <section id="integracoes" className="py-20 bg-background">
-      <div className="container mx-auto px-6 md:px-12">
-        <motion.h2
+    <section id="integracoes" className="relative overflow-hidden bg-secondary/25 py-16 md:py-24">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,hsl(var(--primary)/0.12),transparent)]" />
+
+      <div className="container relative mx-auto px-6 md:px-12">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-foreground mb-12"
+          className="mb-10 text-center md:mb-14 md:text-left"
         >
-          CONHEÇA AS PRINCIPAIS
-          <br />
-          FUNÇÕES DO AZ CHAT
-        </motion.h2>
+          <p className="text-sm font-semibold uppercase tracking-wider text-primary">Funcionalidades</p>
+          <h2 className="mt-2 text-balance text-3xl font-bold leading-tight text-foreground md:text-4xl lg:text-5xl">
+            Conheça as principais
+            <span className="text-primary"> funções </span>
+            do AZ Chat
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-muted-foreground md:mx-0">
+            Selecione um recurso ao lado e assista a uma demonstração em vídeo.
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-3">
-            {functionItems.map((item, i) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-              >
-                <button
-                  type="button"
-                  onClick={() => {
-                    setActiveIndex(i);
-                    openVideo(item.label);
-                  }}
-                  className={cn(
-                    "flex w-full items-center gap-3 rounded-lg border border-transparent px-2 py-2 text-left text-sm transition-colors",
-                    "text-muted-foreground hover:text-foreground",
-                    i === activeIndex
-                      ? "border-primary/40 bg-primary/10 text-foreground"
-                      : "border-b border-border pb-3 hover:border-primary/50",
-                  )}
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
+          <div className="flex flex-col gap-3 lg:col-span-5">
+            {functionItems.map((item, i) => {
+              const active = i === activeIndex;
+              const ItemIcon = item.Icon;
+              return (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
                 >
-                  <span className="text-primary font-bold shrink-0">||</span>
-                  <span className="font-medium">{item.label}</span>
-                </button>
-              </motion.div>
-            ))}
+                  <button
+                    type="button"
+                    onClick={() => setActiveIndex(i)}
+                    className={cn(
+                      glassCard,
+                      "overflow-visible",
+                      "flex w-full items-center gap-4 p-4 text-left md:p-5",
+                      active && "border-primary/45 from-primary/[0.12] ring-1 ring-primary/25",
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl font-mono text-sm font-bold",
+                        active
+                          ? "bg-primary text-primary-foreground shadow-md shadow-primary/25"
+                          : "bg-primary/15 text-primary",
+                      )}
+                    >
+                      {item.short}
+                    </span>
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-background/50">
+                      <ItemIcon className="h-5 w-5 text-primary" />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-primary/90">{item.label}</p>
+                      <p className="truncate font-semibold text-foreground">{item.title}</p>
+                    </div>
+                    <ChevronRight
+                      className={cn(
+                        "h-5 w-5 shrink-0 transition-transform",
+                        active ? "translate-x-0.5 text-primary" : "text-muted-foreground",
+                      )}
+                    />
+                  </button>
+                </motion.div>
+              );
+            })}
           </div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col items-stretch gap-8 md:flex-row md:items-center md:gap-10"
+            className={cn(glassPanel, "flex flex-col gap-6 lg:col-span-7")}
           >
-            <div className="flex shrink-0 justify-center md:justify-start">
-              <button
-                type="button"
-                onClick={() => openVideo(current.label)}
-                className="group relative flex h-52 w-52 cursor-pointer items-center justify-center rounded-full bg-muted transition-transform hover:scale-[1.02] md:h-56 md:w-56"
-                aria-label={`Assistir vídeo — ${current.title}`}
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-foreground transition-transform group-hover:scale-110 md:h-20 md:w-20">
-                  <Play className="ml-1 h-7 w-7 text-background md:h-8 md:w-8" />
-                </div>
-              </button>
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/30 shadow-inner">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-transparent to-[hsl(var(--primary)/0.08)]" />
+              <div className="relative aspect-video w-full">
+                <button
+                  type="button"
+                  onClick={() => openVideo(current.label)}
+                  className="group absolute inset-0 flex cursor-pointer items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  aria-label={`Assistir vídeo — ${current.title}`}
+                >
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/95 text-primary-foreground shadow-xl shadow-primary/40 ring-4 ring-background/20 transition-transform duration-300 group-hover:scale-110 group-active:scale-95 md:h-20 md:w-20">
+                    <Play className="ml-1 h-8 w-8 md:h-9 md:w-9" fill="currentColor" />
+                  </span>
+                  <span className="absolute bottom-4 left-4 right-4 rounded-lg bg-black/50 px-3 py-2 text-center text-xs font-medium text-white/95 backdrop-blur-sm md:text-sm">
+                    Demonstração em vídeo · {current.label}
+                  </span>
+                </button>
+              </div>
             </div>
 
-            <div className="min-w-0 flex-1 space-y-3 text-center md:text-left">
-              <p className="text-xs font-semibold uppercase tracking-wide text-primary">{current.label}</p>
-              <h3 className="text-xl font-bold text-foreground md:text-2xl">{current.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{current.description}</p>
+            <div className="space-y-3 text-center md:text-left">
+              <p className="text-xs font-semibold uppercase tracking-wider text-primary">{current.label}</p>
+              <h3 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">{current.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground md:text-base">{current.description}</p>
+              <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:justify-center md:justify-start">
+                <Button
+                  type="button"
+                  onClick={() => openVideo(current.label)}
+                  className="rounded-full bg-primary px-6 font-semibold text-primary-foreground hover:bg-primary/90"
+                >
+                  <Play className="mr-2 h-4 w-4" />
+                  Assistir vídeo
+                </Button>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -150,7 +203,7 @@ const FunctionsSection = () => {
 
       <Dialog open={dialogOpen} onOpenChange={onDialogOpenChange}>
         <DialogContent className="z-[200] max-w-4xl gap-0 overflow-hidden border-border p-0">
-          <DialogHeader className="px-6 pt-6 pb-2">
+          <DialogHeader className="px-6 pb-2 pt-6">
             <DialogTitle className="text-foreground">{activeLabel}</DialogTitle>
           </DialogHeader>
           <div className="aspect-video w-full bg-black">
